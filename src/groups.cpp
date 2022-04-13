@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "groups.h"
+#include <ui_io.h>
 
 byte Groups::getGroup(byte i, char r[ ]) {
   if (i <= numOfSmallGroups) {
@@ -23,5 +24,14 @@ void Groups::initStuff(storageBlock_C& o, byte id1, storageBlock_C& o2, byte id2
 }
 
 void Groups::printInfo() {
+  byte i;
+  io_printHeading( "Printing setup" );
+  //io_print( "Storeage id" ); io_print_n( blockObj.getId() ); 
+  io_print( "Max groups" ); io_print_n( numOfSmallGroups+numOfSmallGroups ); io_print( ", Lights" ); io_println_n( numLights );
+
+  //io_print("Size of room record extened(room_TE) : ");  io_println_n(roomsRecSizeE);
+  for ( i = 0; i < maxLights; i++ ) {
+    printLightInfo( i );
+  }
 
 }

@@ -1,6 +1,6 @@
 {
     "name": "groups",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "For selecting members of a groups i.e. keeping track which lights to turn on when a switch is switched.",
     "keywords": "groups EEPROM saving sets",
     "repository":
