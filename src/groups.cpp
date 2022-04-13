@@ -1,22 +1,27 @@
 #include <Arduino.h>
+#include "groups.h"
 
-void groupSet(byte i, byte relays9_16, byte relays1_8, byte opts ){
-  byte g_index;
-  if ( i >= No_groups){ return; }
-  g_index = groups_eeprom_start + (i*group_size);
-  EEPROM.update(g_index+0, relays1_8);
-  EEPROM.update(g_index+1, relays9_16);
-  EEPROM.update(g_index+2, opts);
-  groupsSateA[i+1] = 0;
+byte Groups::getGroup(byte i, char r[ ]) {
+  if (i <= numOfSmallGroups) {
+    blockObj3.readSlot(i, r);
+    return 3;
+  } else if (i <= numOfGroups) {
+    blockObj10.readSlot(i-numOfSmallGroups, r);
+    return 10;
+  }
+  // else out of range.
+  return 0;
 }
 
-void setSwitchGroups(byte switchN, byte quick_i, byte normal_i, byte count2_i, byte count3_i, byte count4_i){
-  byte i;
-  if ( switchN >= No_switches_eeprom_res){ return; }
-  i = switches_eeprom_start + (switches_size * switchN);
-  EEPROM.update(i, quick_i);
-  EEPROM.update(i+1, normal_i);
-  EEPROM.update(i+2, count2_i);
-  EEPROM.update(i+3, count3_i);
-  EEPROM.update(i+4, count4_i);
+void Groups::initStuff(storageBlock_C& o, byte id1, storageBlock_C& o2, byte id2) {
+  blockObj3.setMemManager(o);
+  blockObj3.setId(id1);
+  blockObj10.setMemManager(o2);
+  blockObj10.setId(id2);
+  numOfSmallGroups = blockObj3.getSlots();
+  numOfGroups = numOfSmallGroups + blockObj10.getSlots();
+}
+
+void Groups::printInfo() {
+
 }
