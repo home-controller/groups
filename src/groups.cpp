@@ -29,7 +29,7 @@ byte setBits(byte numBytes, byte bitx1, byte bitx2, byte bitx3, byte bitx4, byte
   return i;
 }
 
-byte Groups::getGroup(byte i, char r[ ]) {
+byte Groups::getGroup(byte i, byte r[ ]) {
   if (i <= numOfSmallGroups) {
     blockObj3.readSlot(i, r);
     return 3;
@@ -50,7 +50,7 @@ byte Groups::getGroup(byte i, char r[ ]) {
  * @param r The array of bytes passed in. first element at 0 should be the size of the array.
  * @return byte
  */
-byte Groups::setGroup(byte i, char r[ ]) {
+byte Groups::setGroup(byte i, byte r[ ]) {
   byte l, x;
   if (i <= numOfSmallGroups) {
     l = blockObj3.blockSize();
