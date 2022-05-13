@@ -103,21 +103,19 @@ void Groups::initStuff(storageBlock_C& o, byte id1, storageBlock_C& o2, byte id2
 
 void Groups::printInfo() {
   byte i, x;
-  byte tA[10];
+  byte tA[11];
   io_printHeading("Stored groups");
   //io_print( "Storeage id" ); io_print_n( blockObj.getId() ); 
   io_print("Num of small groups:"); io_println_n(numOfSmallGroups);// io_print( ", Lights" ); io_println_n( numLights );
-  for (i = 1; i <= numOfSmallGroups; i++) {
+  for (i = 1; i <= numOfGroups; i++) {
     getGroup(i, tA);
     io_print_n(i);
     io_print(": len: "); io_print_n(tA[0]);
     io_print(", ");
     for (x = 1; x <= tA[0]; x++) {
-      Serial.print(tA[x]); Serial.print(":");
+      Serial.print(tA[x], HEX); Serial.print(":");
       io_print_nb_f(tA[x], ( x < tA[0] ));
     }
     io_ln;
-
   }
-
 }
