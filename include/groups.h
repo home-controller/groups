@@ -22,7 +22,7 @@ public:
     void printInfo();
     // Groups(/* args */);
     // ~Groups();
-};
+};//t
 
 byte setBits(byte numBytes, byte bitx1, byte bitx2 = 0, byte bitx3 = 0, byte bitx4 = 0, byte bitx5 = 0, byte bitx6 = 0, byte bitx7 = 0);
 // Groups::Groups(/* args */) { }

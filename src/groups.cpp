@@ -31,10 +31,12 @@ byte setBits(byte numBytes, byte bitx1, byte bitx2, byte bitx3, byte bitx4, byte
 
 byte Groups::getGroup(byte i, byte r[ ]) {
   if (i <= numOfSmallGroups) {
-    blockObj3.readSlot(i, r);
+    blockObj3.readSlot(i, r + 1);
+    r[0] = blockObj3.slotSize();
     return 3;
   } else if (i <= numOfGroups) {
-    blockObj10.readSlot(i - numOfSmallGroups, r);
+    blockObj10.readSlot(i - numOfSmallGroups, r + 1);
+    r[0] = 10;
     return 10;
   }
   // else out of range.
@@ -65,7 +67,7 @@ byte Groups::setGroup(byte i, byte r[ ]) {
     return 3;
   } else if (i <= numOfGroups) {
     l = blockObj10.blockSize();
-    i -=numOfSmallGroups;
+    i -= numOfSmallGroups;
     if (r[0] == l) {
       blockObj10.writeSlot(i, r + 1);
     } else {
@@ -82,6 +84,14 @@ byte Groups::setGroup(byte i, byte r[ ]) {
   return 0;
 }
 
+/**
+ * @brief Init groups.
+ *
+ * @param o object keeping track of block of different types of storage slots.
+ * @param id1 The block of storage used to store all the 3 byte long slots.
+ * @param o2 likely the same storage as o but it could be different if different chips were used etc.
+ * @param id2 id of the block of storage used to store slots
+ */
 void Groups::initStuff(storageBlock_C& o, byte id1, storageBlock_C& o2, byte id2) {
   blockObj3.setMemManager(o);
   blockObj3.setId(id1);
@@ -92,14 +102,22 @@ void Groups::initStuff(storageBlock_C& o, byte id1, storageBlock_C& o2, byte id2
 }
 
 void Groups::printInfo() {
-  //byte i;
-  io_printHeading("Printing setup");
+  byte i, x;
+  byte tA[10];
+  io_printHeading("Stored groups");
   //io_print( "Storeage id" ); io_print_n( blockObj.getId() ); 
-  io_print("Max groups"); io_println_n(numOfSmallGroups + numOfSmallGroups);// io_print( ", Lights" ); io_println_n( numLights );
+  io_print("Num of small groups:"); io_println_n(numOfSmallGroups);// io_print( ", Lights" ); io_println_n( numLights );
+  for (i = 1; i <= numOfSmallGroups; i++) {
+    getGroup(i, tA);
+    io_print_n(i);
+    io_print(": len: "); io_print_n(tA[0]);
+    io_print(", ");
+    for (x = 1; x <= tA[0]; x++) {
+      Serial.print(tA[x]); Serial.print(":");
+      io_print_nb_f(tA[x], ( x < tA[0] ));
+    }
+    io_ln;
 
-  // //io_print("Size of room record extened(room_TE) : ");  io_println_n(roomsRecSizeE);
-  // for ( i = 0; i < maxLights; i++ ) {
-  //   printLightInfo( i );
-  // }
+  }
 
 }
