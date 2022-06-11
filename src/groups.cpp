@@ -29,6 +29,13 @@ byte setBits(byte numBytes, byte bitx1, byte bitx2, byte bitx3, byte bitx4, byte
   return i;
 }
 
+/**
+ * @brief Get a group of values from storage
+ * 
+ * @param i the storage slot index to read.
+ * @param[out] r pointer to array to return the group in.
+ * @return byte slot length in bytes. r[0] is also the array length.
+ */
 byte Groups::getGroup(byte i, byte r[ ]) {
   if (i <= numOfSmallGroups) {
     blockObj3.readSlot(i, r + 1);
