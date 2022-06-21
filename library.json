@@ -1,27 +1,23 @@
 {
-    "name": "groups",
-    "version": "0.0.2",
-    "description": "For selecting members of a groups i.e. keeping track which lights to turn on when a switch is switched.",
-    "keywords": "groups EEPROM saving sets",
-    "repository":
+  "name": "groups",
+  "version": "0.0.2",
+  "description": "For selecting members of a groups i.e. keeping track which lights to turn on when a switch is switched.",
+  "keywords": "groups EEPROM saving sets",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:home-controller/groups.git"
+  },
+  "authors": [
     {
-      "type": "git",
-      "url": "git@github.com:home-controller/groups.git"
-    },
-    "authors":
-    [
-      {
-        "name": "jmnc2",
-        "email": "49760581+jmnc2@users.noreply.github.com",
-        "url": "https://github.com/jmnc2",
-        "maintainer": true
-
-      }
-    ],
-    "dependencies": {
-    },
-    "license": "MIT",
-    "homepage": "https://github.com/home-controller/groups",
-    "frameworks": "*",
-    "platforms": "*"
-  }
+      "name": "jmnc2",
+      "email": "49760581+jmnc2@users.noreply.github.com",
+      "url": "https://github.com/jmnc2",
+      "maintainer": true
+    }
+  ],
+  "dependencies": {},
+  "license": "MIT",
+  "homepage": "https://github.com/home-controller/groups",
+  "frameworks": "*",
+  "platforms": "*"
+}
